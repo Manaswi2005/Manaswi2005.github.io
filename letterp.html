@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Love Letter</title>
+  <style>
+    body {
+      font-family: "Georgia", serif;
+      text-align: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .envelope {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      background: #d6336c;
+      border-radius: 5px;
+      cursor: pointer;
+      perspective: 1000px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #b42d59;
+      clip-path: polygon(0 0, 100% 0, 50% 50%);
+      transform-origin: top;
+      transition: transform 1s ease;
+      z-index: 2;
+    }
+
+    .letter {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.5);
+      width: 90vw;
+      max-width: 600px;
+      height: auto;
+      max-height: 80vh;
+      background: #fff0f5;
+      border-radius: 15px;
+      padding: 40px;
+      box-sizing: border-box;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: all 1s ease;
+      z-index: 20;
+      overflow-y: auto;
+    }
+
+    .letter h3 {
+      font-family: "Cursive", serif;
+      margin-bottom: 15px;
+      color: #d6336c;
+      font-size: 28px;
+    }
+
+    .letter p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 15px;
+    }
+
+    /* When opened */
+    .envelope.open .flap {
+      transform: rotateX(-180deg);
+    }
+
+    .envelope.open .letter {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Hearts floating */
+    .heart {
+      position: absolute;
+      bottom: 50px;
+      font-size: 24px;
+      color: red;
+      animation: floatUp 3s ease-in-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      50% { transform: translateY(-150px) scale(1.2); opacity: 0.8; }
+      100% { transform: translateY(-300px) scale(0.8); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="envelope" onclick="toggleLetter()">
+    <div class="flap"></div>
+    <div class="letter">
+      <h3>To My Prajyot<3 </h3>
+      <p>
+        Wish you a Happy Boyfriend's Day!💕💕
+      </p>
+      <p>
+        You the best thing that has happened to me.
+        You mean alot to me and i am so grateful to have you in my life. 
+        I don't have much to say but here a small effort from my side to make you feel special.
+        Not just today but every day, I'll try and make you feel special
+      </p>
+      <p>
+        I Love You Bharapura Bharapura Bharapura ❤️
+      </p>
+      <p><br><b>Tujhi Pilluuu</b> 💌</p>
+    </div>
+  </div>
+
+  <script>
+    function toggleLetter() {
+      const envelope = document.querySelector(".envelope");
+      envelope.classList.toggle("open");
+
+      if (envelope.classList.contains("open")) {
+        releaseHearts();
+      }
+    }
+
+    function releaseHearts() {
+      for (let i = 0; i < 8; i++) {
+        let heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        document.body.appendChild(heart);
+
+        let x = Math.random() * window.innerWidth;
+        heart.style.left = `${x}px`;
+        heart.style.animationDuration = `${2 + Math.random() * 2}s`;
+
+        setTimeout(() => { heart.remove(); }, 4000);
+      }
+    }
+  </script>
+</body>
+</html>
